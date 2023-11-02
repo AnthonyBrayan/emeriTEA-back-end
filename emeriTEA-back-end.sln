@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.6.33815.320
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "emeriTEA-back-end", "emeriTEA-back-end\emeriTEA-back-end.csproj", "{8E2E5144-8E73-4CE5-A3AA-F8984D066A8E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Data", "Data\Data.csproj", "{1AED6CE7-0993-4591-92F9-3CC36967A6BE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Entities", "Entities\Entities.csproj", "{3F855C20-AD4F-4AD0-9CDD-C76D680DC599}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8E2E5144-8E73-4CE5-A3AA-F8984D066A8E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8E2E5144-8E73-4CE5-A3AA-F8984D066A8E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8E2E5144-8E73-4CE5-A3AA-F8984D066A8E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8E2E5144-8E73-4CE5-A3AA-F8984D066A8E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1AED6CE7-0993-4591-92F9-3CC36967A6BE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1AED6CE7-0993-4591-92F9-3CC36967A6BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1AED6CE7-0993-4591-92F9-3CC36967A6BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1AED6CE7-0993-4591-92F9-3CC36967A6BE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3F855C20-AD4F-4AD0-9CDD-C76D680DC599}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3F855C20-AD4F-4AD0-9CDD-C76D680DC599}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3F855C20-AD4F-4AD0-9CDD-C76D680DC599}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3F855C20-AD4F-4AD0-9CDD-C76D680DC599}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B101FAE7-423E-4D4A-B91A-B95D2C2305FF}
+	EndGlobalSection
+EndGlobal
