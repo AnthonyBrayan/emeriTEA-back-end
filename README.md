@@ -18,7 +18,7 @@ This is the back-end of our EmeriTEA's online shop system. Here you can connect 
 
 
 
-## Programmes required
+## Programmes required 💻
 To be able to use the project on localhost it is necessary to clone it and to have some necessary programs:
 
 - [Nodejs](https://nodejs.org/es/download/) v12.18.0 or higher.
