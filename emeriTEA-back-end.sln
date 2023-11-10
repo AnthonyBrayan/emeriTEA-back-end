@@ -5,9 +5,13 @@ VisualStudioVersion = 17.6.33815.320
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "emeriTEA-back-end", "emeriTEA-back-end\emeriTEA-back-end.csproj", "{8E2E5144-8E73-4CE5-A3AA-F8984D066A8E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Data", "Data\Data.csproj", "{1AED6CE7-0993-4591-92F9-3CC36967A6BE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Data", "Data\Data.csproj", "{1AED6CE7-0993-4591-92F9-3CC36967A6BE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Entities", "Entities\Entities.csproj", "{3F855C20-AD4F-4AD0-9CDD-C76D680DC599}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Entities", "Entities\Entities.csproj", "{3F855C20-AD4F-4AD0-9CDD-C76D680DC599}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Login", "Login\Login.csproj", "{6D5C7ECF-0EF4-49D9-85C2-866DA50D0B75}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestControllerAdministrador", "TestControllerAdministrador\TestControllerAdministrador.csproj", "{5FA63FE2-1B74-4A51-A611-2AA04DBE274A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +31,14 @@ Global
 		{3F855C20-AD4F-4AD0-9CDD-C76D680DC599}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3F855C20-AD4F-4AD0-9CDD-C76D680DC599}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3F855C20-AD4F-4AD0-9CDD-C76D680DC599}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6D5C7ECF-0EF4-49D9-85C2-866DA50D0B75}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6D5C7ECF-0EF4-49D9-85C2-866DA50D0B75}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6D5C7ECF-0EF4-49D9-85C2-866DA50D0B75}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6D5C7ECF-0EF4-49D9-85C2-866DA50D0B75}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5FA63FE2-1B74-4A51-A611-2AA04DBE274A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5FA63FE2-1B74-4A51-A611-2AA04DBE274A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5FA63FE2-1B74-4A51-A611-2AA04DBE274A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5FA63FE2-1B74-4A51-A611-2AA04DBE274A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -31,6 +31,7 @@ namespace Entities
         [JsonIgnore]
         public virtual Administrador Administrador { get; set; }
 
+        [JsonIgnore]
         public ICollection<GuestCart> GuestCart { get; set; }
     }
 }
