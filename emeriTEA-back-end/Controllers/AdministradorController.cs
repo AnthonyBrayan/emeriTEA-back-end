@@ -3,16 +3,18 @@ using emeriTEA_back_end.IServices;
 using Entities;
 using Login;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Cors;
+
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
-using System.Web.Http.Cors;
 
 namespace emeriTEA_back_end.Controllers
 {
-    [EnableCors(origins: "*", headers: "*", methods: "*")]
+    [EnableCors("AllowAll")]
     [Route("[controller]/[action]")]
+
     public class AdministradorControlle : ControllerBase
     {
         private readonly IConfiguration _configuration;
@@ -63,7 +65,6 @@ namespace emeriTEA_back_end.Controllers
                 {
                     var token = GenerateJwtToken(administrador);
 
-                    ////// Establece el token en una cookie y luego responde con el token
                     Response.Cookies.Append("jwtToken", token, new CookieOptions
                     {
                         HttpOnly = false, // Para mayor seguridad, marca la cookie como httpOnly
@@ -71,8 +72,6 @@ namespace emeriTEA_back_end.Controllers
                     });
 
                     return Ok(new { Token = token});
-
-                    //return StatusCode(200, "Inicio de sesión exitoso");
 
                 }
                 else
@@ -97,9 +96,8 @@ namespace emeriTEA_back_end.Controllers
                 Subject = new ClaimsIdentity(new[]
                 {
                     new Claim(ClaimTypes.Name, administrador.Id_Administrador.ToString()),
-                    // Otros claims si es necesario
                 }),
-                Expires = DateTime.UtcNow.AddHours(1), // Duración del token
+                Expires = DateTime.UtcNow.AddHours(1),
                 SigningCredentials = new SigningCredentials(
                     new SymmetricSecurityKey(key),
                     SecurityAlgorithms.HmacSha256Signature

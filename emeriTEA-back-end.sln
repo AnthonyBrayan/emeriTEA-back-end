@@ -9,7 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Data", "Data\Data.csproj", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Entities", "Entities\Entities.csproj", "{3F855C20-AD4F-4AD0-9CDD-C76D680DC599}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Login", "Login\Login.csproj", "{6D5C7ECF-0EF4-49D9-85C2-866DA50D0B75}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Login", "Login\Login.csproj", "{6D5C7ECF-0EF4-49D9-85C2-866DA50D0B75}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestControllerAdministrador", "TestControllerAdministrador\TestControllerAdministrador.csproj", "{5FA63FE2-1B74-4A51-A611-2AA04DBE274A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{6D5C7ECF-0EF4-49D9-85C2-866DA50D0B75}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6D5C7ECF-0EF4-49D9-85C2-866DA50D0B75}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6D5C7ECF-0EF4-49D9-85C2-866DA50D0B75}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5FA63FE2-1B74-4A51-A611-2AA04DBE274A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5FA63FE2-1B74-4A51-A611-2AA04DBE274A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5FA63FE2-1B74-4A51-A611-2AA04DBE274A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5FA63FE2-1B74-4A51-A611-2AA04DBE274A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
