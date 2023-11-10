@@ -1,4 +1,4 @@
-# emeriTEA-back-end
+# EmeriTEA-back-end
 
 <p align="center"><img src="https://res.cloudinary.com/dgsqxkvfz/image/upload/v1699348285/toseozbbon8ni9jq03ys.png" width="150" heigth="50" justify-content="center"></p>
 
@@ -8,6 +8,8 @@ This is the back-end of our EmeriTEA's online shop system. Here you can connect 
 ## Screenshots 📷
 <img src="https://res.cloudinary.com/dgsqxkvfz/image/upload/v1699523614/post_2_1_fcgbh9.png" width="200" heigth="50">
 <img src="https://res.cloudinary.com/dgsqxkvfz/image/upload/v1699523734/post_2_mwkcgp.png" width="200" heigth="50">
+<img src="https://res.cloudinary.com/dgsqxkvfz/image/upload/v1699604234/Test_inser_admi_1_dadlpm.png" width="200" heigth="50">
+<img src="https://res.cloudinary.com/dgsqxkvfz/image/upload/v1699604259/test_inser_admi_2_cayamn.png" width="200" heigth="50">
 
 
 
