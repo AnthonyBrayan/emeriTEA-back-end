@@ -67,8 +67,8 @@ namespace emeriTEA_back_end.Controllers
 
                     Response.Cookies.Append("jwtToken", token, new CookieOptions
                     {
-                        HttpOnly = false, // Para mayor seguridad, marca la cookie como httpOnly
-                                          // Otras opciones de cookie si es necesario
+                        HttpOnly = false,
+
                     });
 
                     return Ok(new { Token = token});
