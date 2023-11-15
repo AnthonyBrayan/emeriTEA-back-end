@@ -16,5 +16,24 @@ namespace emeriTEA_back_end.Services
             _serviceContext.SaveChanges();
             return product.Id_Product;
         }
+        public void DeleteProduct(int productId)
+        {
+            var product = _serviceContext.Product.Find(productId);
+            if (product != null)
+            {
+                _serviceContext.Product.Remove(product);
+                _serviceContext.SaveChanges();
+            }
+            else
+            {
+                throw new InvalidOperationException("El producto no existe.");
+            }
+        }
+
+
+
+
+
+
     }
 }
