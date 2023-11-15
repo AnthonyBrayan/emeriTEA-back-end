@@ -25,6 +25,7 @@ builder.Services.AddCors(options =>
 
 
 builder.Services.AddScoped<IAdministradorService, AdministradorService>();
+builder.Services.AddScoped<IProductService, ProductService>();
 
 builder.Services.AddDbContext<ServiceContext>(options => options.UseSqlServer("name=ConnectionStrings:ServiceContext"));
 

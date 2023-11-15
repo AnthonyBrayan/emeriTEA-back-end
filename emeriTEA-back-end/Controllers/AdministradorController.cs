@@ -14,7 +14,7 @@ namespace emeriTEA_back_end.Controllers
 {
     [EnableCors("AllowAll")]
     [Route("[controller]/[action]")]
-
+      
     public class AdministradorControlle : ControllerBase
     {
         private readonly IConfiguration _configuration;
