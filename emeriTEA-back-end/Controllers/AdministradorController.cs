@@ -85,8 +85,6 @@ namespace emeriTEA_back_end.Controllers
             }
         }
 
-
-
         private string GenerateJwtToken(Administrador administrador)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
