@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Data.Migrations
 {
     [DbContext(typeof(ServiceContext))]
-    [Migration("20231102185530_Initial")]
+    [Migration("20231115085619_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -159,6 +159,10 @@ namespace Data.Migrations
 
                     b.Property<double>("Price")
                         .HasColumnType("float");
+
+                    b.Property<string>("Size")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("stock")
                         .HasColumnType("int");
