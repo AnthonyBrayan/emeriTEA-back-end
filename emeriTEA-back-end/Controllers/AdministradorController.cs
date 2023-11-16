@@ -9,6 +9,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using emeriTEA_back_end.Services;
 
 namespace emeriTEA_back_end.Controllers
 {
@@ -19,12 +20,14 @@ namespace emeriTEA_back_end.Controllers
     {
         private readonly IConfiguration _configuration;
         private readonly IAdministradorService _administradorService;
+        private readonly ITokenService _tokenService;
         private readonly ServiceContext _serviceContext;
 
-        public AdministradorControlle(IConfiguration configuration, IAdministradorService administradorService, ServiceContext serviceContext)
+        public AdministradorControlle(IConfiguration configuration, IAdministradorService administradorService, ITokenService tokenService, ServiceContext serviceContext)
         {
             _configuration = configuration;
             _administradorService = administradorService;
+            _tokenService = tokenService;
             _serviceContext = serviceContext;
         }
 
@@ -33,20 +36,32 @@ namespace emeriTEA_back_end.Controllers
         {
             try
             {
+                Console.WriteLine("Id_administrador received: " + administrador.Id_Administrador);
+                var userId = _tokenService.ExtractUserIdFromToken(HttpContext);
+                //var userId = _tokenService.ExtractUserIdFromAuthorizationHeader(HttpContext);
 
-                var existingUserWithSameEmail = _serviceContext.Administrador.FirstOrDefault(u => u.Email == administrador.Email);
-
-                if (existingUserWithSameEmail != null)
+                if (userId == null)
                 {
-                    return StatusCode(409, "A administrador with the same email address already exists.");
+
+                    return Unauthorized("User is not authenticated.");
                 }
                 else
                 {
+                    var existingUserWithSameEmail = _serviceContext.Administrador.FirstOrDefault(u => u.Email == administrador.Email);
 
-                    administrador.Password = BCrypt.Net.BCrypt.HashPassword(administrador.Password);
+                    if (existingUserWithSameEmail != null)
+                    {
+                        return StatusCode(409, "A administrador with the same email address already exists.");
+                    }
+                    else
+                    {
 
-                    return Ok(_administradorService.InsertAdministrador(administrador));
+                        administrador.Password = BCrypt.Net.BCrypt.HashPassword(administrador.Password);
+
+                        return Ok(_administradorService.InsertAdministrador(administrador));
+                    }
                 }
+
             }
             catch (Exception ex)
             {
@@ -104,9 +119,6 @@ namespace emeriTEA_back_end.Controllers
             var token = tokenHandler.CreateToken(tokenDescriptor);
             return tokenHandler.WriteToken(token);
         }
-
-
-
 
     }
 }
