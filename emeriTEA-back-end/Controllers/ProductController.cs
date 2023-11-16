@@ -5,6 +5,7 @@ using emeriTEA_back_end.IServices;
 using emeriTEA_back_end.Services;
 using Microsoft.Extensions.Configuration;
 using Entities;
+using System.Security.Authentication;
 
 namespace emeriTEA_back_end.Controllers
 {
@@ -47,6 +48,31 @@ namespace emeriTEA_back_end.Controllers
                 return StatusCode(500, $"Error getting ID: {ex.Message}");
             }
         }
+
+        [HttpDelete("{productId}", Name = "DeleteProduct")]
+        public IActionResult Delete(int productId)
+        {
+            var selectedUser = _serviceContext.Set<Product>()
+                   .Where(u => u.Id_Product == productId)
+                    .FirstOrDefault();
+
+            if (selectedUser != null)
+            {
+                _productService.DeleteProduct(productId);
+
+                // Devolver una respuesta con un mensaje de éxito o redirigir a una página de éxito
+                return Ok(new { message = "Producto eliminado exitosamente" });
+            }
+            else
+            {
+                throw new InvalidCredentialException("El usuario no está autorizado o no existe");
+            }
+        }
+
+
+
+
+
 
     }
 }
