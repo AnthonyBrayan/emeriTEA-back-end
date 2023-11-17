@@ -6,5 +6,7 @@ namespace emeriTEA_back_end.IServices
     {
         int InsertProduct(Product product);
         void DeleteProduct(int ProductId);
+
+        List<Product> GetProducts();
     }
 }

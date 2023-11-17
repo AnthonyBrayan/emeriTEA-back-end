@@ -31,6 +31,11 @@ namespace emeriTEA_back_end.Services
             }
         }
 
+        public List<Product> GetProducts()
+        {
+            return _serviceContext.Product.ToList();
+        }
+
 
 
 
