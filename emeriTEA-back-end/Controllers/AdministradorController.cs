@@ -43,7 +43,7 @@ namespace emeriTEA_back_end.Controllers
                 if (userId == null)
                 {
 
-                    return Unauthorized("User is not authenticated.");
+                    return Unauthorized("Administrador is not authenticated.");
                 }
                 else
                 {

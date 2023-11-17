@@ -16,13 +16,16 @@ namespace emeriTEA_back_end.Controllers
     {
 
         private readonly IProductService _productService;
+        private readonly ITokenService _tokenService;
         private readonly ServiceContext _serviceContext;
 
-        public ProductController(IProductService productService, ServiceContext serviceContext)
+        public ProductController(IProductService productService, ITokenService tokenService, ServiceContext serviceContext)
         {
 
             _productService = productService;
+            _tokenService = tokenService;
             _serviceContext = serviceContext;
+
         }
 
         [HttpPost(Name = "InsertProduc")]
@@ -30,18 +33,29 @@ namespace emeriTEA_back_end.Controllers
         {
             try
             {
-
-                var existingUserWithSameName = _serviceContext.Product.FirstOrDefault(u => u.Name_product == product.Name_product);
-
-                if (existingUserWithSameName != null)
+                //var userId = _tokenService.ExtractUserIdFromToken(HttpContext);
+                var userId = _tokenService.ExtractUserIdFromAuthorizationHeader(HttpContext);
+                if (userId == null)
                 {
-                    return StatusCode(409, "A Product with the same name address already exists.");
+
+                    return Unauthorized("Administrador is not authenticated.");
                 }
                 else
                 {
+                    product.Id_Administrador = userId.Value;
+                    var existingUserWithSameName = _serviceContext.Product.FirstOrDefault(u => u.Name_product == product.Name_product);
 
-                    return Ok(_productService.InsertProduct(product));
+                    if (existingUserWithSameName != null)
+                    {
+                        return StatusCode(409, "A Product with the same name address already exists.");
+                    }
+                    else
+                    {
+
+                        return Ok(_productService.InsertProduct(product));
+                    }
                 }
+
             }
             catch (Exception ex)
             {
