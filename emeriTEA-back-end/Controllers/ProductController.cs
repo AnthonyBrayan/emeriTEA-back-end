@@ -2,10 +2,9 @@
 using Microsoft.AspNetCore.Cors;
 using Data;
 using emeriTEA_back_end.IServices;
-using emeriTEA_back_end.Services;
-using Microsoft.Extensions.Configuration;
 using Entities;
 using System.Security.Authentication;
+
 
 namespace emeriTEA_back_end.Controllers
 {
@@ -28,40 +27,31 @@ namespace emeriTEA_back_end.Controllers
 
         }
 
-        [HttpPost(Name = "InsertProduc")]
-        public IActionResult Post([FromBody] Product product)
+        [HttpPost]
+        public IActionResult AddProductWithSizes([FromBody] Product product)
         {
-            try
+
+            //var userId = _tokenService.ExtractUserIdFromToken(HttpContext);
+            var userId = _tokenService.ExtractUserIdFromAuthorizationHeader(HttpContext);
+
+            if (userId == null)
             {
-                //var userId = _tokenService.ExtractUserIdFromToken(HttpContext);
-                var userId = _tokenService.ExtractUserIdFromAuthorizationHeader(HttpContext);
-                if (userId == null)
-                {
 
-                    return Unauthorized("Administrador is not authenticated.");
-                }
-                else
-                {
-                    product.Id_Administrador = userId.Value;
-                    var existingUserWithSameName = _serviceContext.Product.FirstOrDefault(u => u.Name_product == product.Name_product);
-
-                    if (existingUserWithSameName != null)
-                    {
-                        return StatusCode(409, "A Product with the same name address already exists.");
-                    }
-                    else
-                    {
-
-                        return Ok(_productService.InsertProduct(product));
-                    }
-                }
-
+                return Unauthorized("User is not authenticated.");
             }
-            catch (Exception ex)
+            else
             {
-                return StatusCode(500, $"Error getting ID: {ex.Message}");
+                product.Id_Administrador = (int)userId;
+                var productId = _productService.AddProductWithSizes(product);
+                if (productId != -1)
+                {
+                    return Ok(productId);
+                }
+                return BadRequest("Algunas tallas no fueron encontradas");
             }
         }
+
+
 
         [HttpDelete("{productId}", Name = "DeleteProduct")]
         public IActionResult Delete(int productId)

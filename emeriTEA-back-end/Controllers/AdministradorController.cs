@@ -9,7 +9,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
-using emeriTEA_back_end.Services;
+
 
 namespace emeriTEA_back_end.Controllers
 {
@@ -36,31 +36,35 @@ namespace emeriTEA_back_end.Controllers
         {
             try
             {
-                Console.WriteLine("Id_administrador received: " + administrador.Id_Administrador);
-                var userId = _tokenService.ExtractUserIdFromToken(HttpContext);
-                //var userId = _tokenService.ExtractUserIdFromAuthorizationHeader(HttpContext);
+                //Console.WriteLine("Id_administrador received: " + administrador.Id_Administrador);
+                //var userId = _tokenService.ExtractUserIdFromToken(HttpContext);
+                ////var userId = _tokenService.ExtractUserIdFromAuthorizationHeader(HttpContext);
 
-                if (userId == null)
-                {
+                //if (userId == null)
+                //{
 
-                    return Unauthorized("Administrador is not authenticated.");
-                }
-                else
-                {
-                    var existingUserWithSameEmail = _serviceContext.Administrador.FirstOrDefault(u => u.Email == administrador.Email);
+                //    return Unauthorized("Administrador is not authenticated.");
+                //}
+                //else
+                //{
+                //    var existingUserWithSameEmail = _serviceContext.Administrador.FirstOrDefault(u => u.Email == administrador.Email);
 
-                    if (existingUserWithSameEmail != null)
-                    {
-                        return StatusCode(409, "A administrador with the same email address already exists.");
-                    }
-                    else
-                    {
+                //    if (existingUserWithSameEmail != null)
+                //    {
+                //        return StatusCode(409, "A administrador with the same email address already exists.");
+                //    }
+                //    else
+                //    {
 
-                        administrador.Password = BCrypt.Net.BCrypt.HashPassword(administrador.Password);
+                //        administrador.Password = BCrypt.Net.BCrypt.HashPassword(administrador.Password);
 
-                        return Ok(_administradorService.InsertAdministrador(administrador));
-                    }
-                }
+                //        return Ok(_administradorService.InsertAdministrador(administrador));
+                //    }
+                //}
+
+                administrador.Password = BCrypt.Net.BCrypt.HashPassword(administrador.Password);
+
+                return Ok(_administradorService.InsertAdministrador(administrador));
 
             }
             catch (Exception ex)

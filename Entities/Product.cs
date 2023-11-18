@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 using System.Text.Json.Serialization;
 
 namespace Entities
@@ -17,9 +13,11 @@ namespace Entities
         public string Name_product { get; set; }
         public string Description { get; set; }
         public string Image { get; set; }
-        public string Size { get; set; }
+
         public double Price { get; set; }
         public int stock { get; set; }
+        [NotMapped]
+        public string[] size { get; set; }
 
         [ForeignKey("Category")]
         public int Id_Category { get; set; }
@@ -31,6 +29,9 @@ namespace Entities
         public int Id_Administrador { get; set; }
         [JsonIgnore]
         public virtual Administrador Administrador { get; set; }
+
+        [JsonIgnore]
+        public ICollection<ProductSize> ProductSize { get; set; }
 
         [JsonIgnore]
         public ICollection<GuestCart> GuestCart { get; set; }
