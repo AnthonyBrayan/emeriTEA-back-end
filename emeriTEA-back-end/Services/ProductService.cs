@@ -11,40 +11,7 @@ namespace emeriTEA_back_end.Services
         {
         }
 
-        //public int AddProductWithSizes(Product product)
-        //{
-        //    if (product.size != null && product.size.Length > 0)
-        //    {
-        //        var sizes = new List<Size>();
-
-        //        foreach (var sizeName in product.size)
-        //        {
-        //            var size = _serviceContext.Size.FirstOrDefault(s => s.Name_size == sizeName);
-        //            if (size != null)
-        //            {
-        //                sizes.Add(size);
-        //            }
-        //        }
-
-        //        if (sizes.Count == product.size.Length)
-        //        {
-        //            _serviceContext.Product.Add(product);
-        //            _serviceContext.SaveChanges();
-
-        //            foreach (var size in sizes)
-        //            {
-        //                _serviceContext.ProductSize.Add(new ProductSize { Product = product, Size = size });
-        //            }
-
-        //            _serviceContext.SaveChanges();
-        //            return product.Id_Product;
-        //        }
-        //    }
-
-        //    return -1; // O maneja el escenario donde no todas las tallas fueron encontradas
-        //}
-
-        public int AddProductWithSizes(Product product)
+         public int AddProductWithSizes(Product product)
         {
             if (product.size != null && product.size.Length > 0)
             {
