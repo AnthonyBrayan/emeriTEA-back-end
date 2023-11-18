@@ -61,7 +61,7 @@ namespace Data.Migrations
 
                     b.HasKey("Id_Category");
 
-                    b.ToTable("Category");
+                    b.ToTable("Category", (string)null);
                 });
 
             modelBuilder.Entity("Entities.Guest", b =>
@@ -90,7 +90,7 @@ namespace Data.Migrations
 
                     b.HasKey("Id_guest");
 
-                    b.ToTable("Guest");
+                    b.ToTable("Guest", (string)null);
                 });
 
             modelBuilder.Entity("Entities.GuestCart", b =>
@@ -125,7 +125,7 @@ namespace Data.Migrations
 
                     b.HasIndex("Id_guest");
 
-                    b.ToTable("GuestCart");
+                    b.ToTable("GuestCart", (string)null);
                 });
 
             modelBuilder.Entity("Entities.Product", b =>
@@ -157,10 +157,6 @@ namespace Data.Migrations
                     b.Property<double>("Price")
                         .HasColumnType("float");
 
-                    b.Property<string>("Size")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<int>("stock")
                         .HasColumnType("int");
 
@@ -170,7 +166,47 @@ namespace Data.Migrations
 
                     b.HasIndex("Id_Category");
 
-                    b.ToTable("Product");
+                    b.ToTable("Product", (string)null);
+                });
+
+            modelBuilder.Entity("Entities.ProductSize", b =>
+                {
+                    b.Property<int>("Id_ProductSize")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id_ProductSize"));
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SizeId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id_ProductSize");
+
+                    b.HasIndex("ProductId");
+
+                    b.HasIndex("SizeId");
+
+                    b.ToTable("ProductSize", (string)null);
+                });
+
+            modelBuilder.Entity("Entities.Size", b =>
+                {
+                    b.Property<int>("Id_size")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id_size"));
+
+                    b.Property<string>("Name_size")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id_size");
+
+                    b.ToTable("Size", (string)null);
                 });
 
             modelBuilder.Entity("Entities.GuestCart", b =>
@@ -211,6 +247,25 @@ namespace Data.Migrations
                     b.Navigation("Category");
                 });
 
+            modelBuilder.Entity("Entities.ProductSize", b =>
+                {
+                    b.HasOne("Entities.Product", "Product")
+                        .WithMany("ProductSize")
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Entities.Size", "Size")
+                        .WithMany("ProductSize")
+                        .HasForeignKey("SizeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Product");
+
+                    b.Navigation("Size");
+                });
+
             modelBuilder.Entity("Entities.Administrador", b =>
                 {
                     b.Navigation("Product");
@@ -229,6 +284,13 @@ namespace Data.Migrations
             modelBuilder.Entity("Entities.Product", b =>
                 {
                     b.Navigation("GuestCart");
+
+                    b.Navigation("ProductSize");
+                });
+
+            modelBuilder.Entity("Entities.Size", b =>
+                {
+                    b.Navigation("ProductSize");
                 });
 #pragma warning restore 612, 618
         }

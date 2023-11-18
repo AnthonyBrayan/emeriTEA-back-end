@@ -4,9 +4,13 @@ namespace emeriTEA_back_end.IServices
 {
     public interface IProductService
     {
-        int InsertProduct(Product product);
+        //int InsertProduct(Product product);
+
+        int AddProductWithSizes(Product product);
         void DeleteProduct(int ProductId);
 
-        List<Product> GetProducts();
+        List<object> GetProducts();
+        //List<Product> GetProductsWithSizes();
+
     }
 }
