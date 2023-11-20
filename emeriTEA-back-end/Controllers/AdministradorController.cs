@@ -10,21 +10,24 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 
+
 namespace emeriTEA_back_end.Controllers
 {
     [EnableCors("AllowAll")]
     [Route("[controller]/[action]")]
-
+      
     public class AdministradorControlle : ControllerBase
     {
         private readonly IConfiguration _configuration;
         private readonly IAdministradorService _administradorService;
+        private readonly ITokenService _tokenService;
         private readonly ServiceContext _serviceContext;
 
-        public AdministradorControlle(IConfiguration configuration, IAdministradorService administradorService, ServiceContext serviceContext)
+        public AdministradorControlle(IConfiguration configuration, IAdministradorService administradorService, ITokenService tokenService, ServiceContext serviceContext)
         {
             _configuration = configuration;
             _administradorService = administradorService;
+            _tokenService = tokenService;
             _serviceContext = serviceContext;
         }
 
@@ -33,20 +36,36 @@ namespace emeriTEA_back_end.Controllers
         {
             try
             {
+                //Console.WriteLine("Id_administrador received: " + administrador.Id_Administrador);
+                //var userId = _tokenService.ExtractUserIdFromToken(HttpContext);
+                ////var userId = _tokenService.ExtractUserIdFromAuthorizationHeader(HttpContext);
 
-                var existingUserWithSameEmail = _serviceContext.Administrador.FirstOrDefault(u => u.Email == administrador.Email);
+                //if (userId == null)
+                //{
 
-                if (existingUserWithSameEmail != null)
-                {
-                    return StatusCode(409, "A administrador with the same email address already exists.");
-                }
-                else
-                {
+                //    return Unauthorized("Administrador is not authenticated.");
+                //}
+                //else
+                //{
+                //    var existingUserWithSameEmail = _serviceContext.Administrador.FirstOrDefault(u => u.Email == administrador.Email);
 
-                    administrador.Password = BCrypt.Net.BCrypt.HashPassword(administrador.Password);
+                //    if (existingUserWithSameEmail != null)
+                //    {
+                //        return StatusCode(409, "A administrador with the same email address already exists.");
+                //    }
+                //    else
+                //    {
 
-                    return Ok(_administradorService.InsertAdministrador(administrador));
-                }
+                //        administrador.Password = BCrypt.Net.BCrypt.HashPassword(administrador.Password);
+
+                //        return Ok(_administradorService.InsertAdministrador(administrador));
+                //    }
+                //}
+
+                administrador.Password = BCrypt.Net.BCrypt.HashPassword(administrador.Password);
+
+                return Ok(_administradorService.InsertAdministrador(administrador));
+
             }
             catch (Exception ex)
             {
@@ -67,8 +86,8 @@ namespace emeriTEA_back_end.Controllers
 
                     Response.Cookies.Append("jwtToken", token, new CookieOptions
                     {
-                        HttpOnly = false, // Para mayor seguridad, marca la cookie como httpOnly
-                                          // Otras opciones de cookie si es necesario
+                        HttpOnly = false,
+
                     });
 
                     return Ok(new { Token = token});
@@ -84,8 +103,6 @@ namespace emeriTEA_back_end.Controllers
                 return StatusCode(500, $"Error al iniciar sesión: {ex.Message}");
             }
         }
-
-
 
         private string GenerateJwtToken(Administrador administrador)
         {
@@ -106,9 +123,6 @@ namespace emeriTEA_back_end.Controllers
             var token = tokenHandler.CreateToken(tokenDescriptor);
             return tokenHandler.WriteToken(token);
         }
-
-
-
 
     }
 }

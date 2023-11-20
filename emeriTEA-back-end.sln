@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Entities", "Entities\Entiti
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Login", "Login\Login.csproj", "{6D5C7ECF-0EF4-49D9-85C2-866DA50D0B75}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestControllerAdministrador", "TestControllerAdministrador\TestControllerAdministrador.csproj", "{5FA63FE2-1B74-4A51-A611-2AA04DBE274A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestControllerAdministrador", "TestControllerAdministrador\TestControllerAdministrador.csproj", "{5FA63FE2-1B74-4A51-A611-2AA04DBE274A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
