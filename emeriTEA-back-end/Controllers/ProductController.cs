@@ -83,10 +83,23 @@ namespace emeriTEA_back_end.Controllers
             }
         }
 
+        [HttpPut("{productId}", Name = "UpdateProduct")]
+        public IActionResult Put(int productId, ProductRequestModel updatedProduct)
+        {
+            var selectedProduct = _serviceContext.Set<Product>()
+                .Where(u => u.Id_Product == productId)
+                .FirstOrDefault();
 
-
-
-
+            if (selectedProduct != null)
+            {
+                _productService.UpdateProduct(productId, updatedProduct);
+                return NoContent();
+            }
+            else
+            {
+                throw new InvalidCredentialException("El producto no existe");
+            }
+        }
 
     }
 }

@@ -22,6 +22,7 @@ namespace TestControllerAdministrador
         private IAdministradorService _administradorService;
         private ServiceContext _serviceContext;
         private AdministradorControlle _administradorControlle;
+        private ITokenService _tokenService;
 
         public AdministradorControlleTests()
         {
@@ -35,7 +36,7 @@ namespace TestControllerAdministrador
 
             _serviceContext = new ServiceContext(options);
             _administradorService = new AdministradorService(_serviceContext);
-            _administradorControlle = new AdministradorControlle(null, _administradorService, _serviceContext);
+            _administradorControlle = new AdministradorControlle(null, _administradorService, _tokenService, _serviceContext);
         }
 
 
