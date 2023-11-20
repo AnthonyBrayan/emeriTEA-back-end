@@ -12,6 +12,7 @@ namespace emeriTEA_back_end.Services
         }
 
          public int AddProductWithSizes(Product product)
+
         {
             if (product.size != null && product.size.Length > 0)
             {
@@ -28,7 +29,7 @@ namespace emeriTEA_back_end.Services
 
                 if (sizes.Count != product.size.Length)
                 {
-                    return -1; // Alguna talla no fue encontrada
+                    return -1;
                 }
 
                 _serviceContext.Product.Add(product);
@@ -44,7 +45,6 @@ namespace emeriTEA_back_end.Services
             }
             else
             {
-                // Si el array de tallas está vacío, se agrega el producto sin tallas
                 _serviceContext.Product.Add(product);
                 _serviceContext.SaveChanges();
                 return product.Id_Product;
@@ -63,6 +63,25 @@ namespace emeriTEA_back_end.Services
             {
                 throw new InvalidOperationException("El producto no existe.");
             }
+        }
+
+        public List<object> GetProducts()
+        {
+            var productsWithProductSizes = _serviceContext.Product
+                .Select(p => new
+                {
+                    p.Id_Product,
+                    p.Name_product,
+                    p.Description,
+                    p.Image,
+                    size = p.ProductSize.Select(ps => ps.Size.Name_size).ToList(),
+                    p.Price,
+                    p.stock,
+                    p.Id_Category
+                })
+                .ToList<object>();
+
+            return productsWithProductSizes;
         }
     }
 }

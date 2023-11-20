@@ -73,6 +73,18 @@ namespace emeriTEA_back_end.Controllers
             }
         }
 
+        [HttpGet(Name = "GetProducts")]
+        public List<object> GetProducts()
+        {
+            return _productService.GetProducts();
+        }
+
+        //[HttpGet(Name = "GetProductsWithSizes")]
+        //public List<Product> GetProductsWithSizes()
+        //{
+        //    return _productService.GetProductsWithSizes();
+        //}
+
 
 
 
