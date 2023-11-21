@@ -65,7 +65,6 @@ namespace emeriTEA_back_end.Services
             }
         }
 
-
         public void UpdateProduct(int productId, Product updatedProduct)
         {
             var existingProduct = _serviceContext.Product
@@ -86,40 +85,36 @@ namespace emeriTEA_back_end.Services
             existingProduct.Id_Category = updatedProduct.Id_Category;
             existingProduct.Id_Administrador = updatedProduct.Id_Administrador;
 
-            if (existingProduct.Id_Category == 1) // Si la categoría es Accesorio
+            if (existingProduct.Id_Category == 1)
             {
                 if (existingProduct.ProductSize.Any())
                 {
                     _serviceContext.ProductSize.RemoveRange(existingProduct.ProductSize);
                 }
             }
-            else if (existingProduct.Id_Category == 2) // Si la categoría es Prenda
+            else if (existingProduct.Id_Category == 2) 
             {
+
+                _serviceContext.ProductSize.RemoveRange(existingProduct.ProductSize);
+
                 if (updatedProduct.size.Any())
                 {
-                    // Obtener todos los tamaños de la base de datos
                     var sizes = _serviceContext.Size.ToList();
 
                     foreach (var newSizeName in updatedProduct.size)
                     {
-                        // Encuentra el tamaño por nombre insensible a mayúsculas/minúsculas
+
                         var sizeByName = sizes.FirstOrDefault(s => string.Equals(s.Name_size, newSizeName, StringComparison.OrdinalIgnoreCase));
 
                         if (sizeByName != null)
                         {
-                            // Verifica si ya existe una asociación para este tamaño
-                            var existingProductSize = existingProduct.ProductSize.FirstOrDefault(ps => ps.SizeId == sizeByName.Id_size);
-
-                            if (existingProductSize == null)
-                            {
-                                // Si no existe, crea una nueva asociación con el tamaño
                                 var newSizeAssociation = new ProductSize
                                 {
                                     ProductId = existingProduct.Id_Product,
                                     SizeId = sizeByName.Id_size
                                 };
                                 existingProduct.ProductSize.Add(newSizeAssociation);
-                            }
+
                         }
                     }
                 }
