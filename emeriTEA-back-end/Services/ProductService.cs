@@ -65,6 +65,7 @@ namespace emeriTEA_back_end.Services
             }
         }
 
+
         public void UpdateProduct(int productId, Product updatedProduct)
         {
             var existingProduct = _serviceContext.Product

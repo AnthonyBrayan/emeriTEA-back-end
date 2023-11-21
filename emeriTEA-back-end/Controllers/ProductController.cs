@@ -88,8 +88,8 @@ namespace emeriTEA_back_end.Controllers
         [HttpPut("{productId}", Name = "UpdateProduct")]
         public IActionResult Put( int productId, [FromBody] Product updatedProduct)
         {
-            //var userId = _tokenService.ExtractUserIdFromToken(HttpContext);
-            var userId = _tokenService.ExtractUserIdFromAuthorizationHeader(HttpContext);
+            var userId = _tokenService.ExtractUserIdFromToken(HttpContext);
+            //var userId = _tokenService.ExtractUserIdFromAuthorizationHeader(HttpContext);
 
             if (userId == null)
             {
