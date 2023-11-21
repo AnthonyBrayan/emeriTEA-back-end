@@ -65,6 +65,29 @@ namespace emeriTEA_back_end.Services
             }
         }
 
+        public void UpdateProduct(int productId, Product updatedProduct)
+        {
+            var existingProduct = _serviceContext.Product.FirstOrDefault(p => p.Id_Product == productId);
+
+            if (existingProduct == null)
+            {
+                // Si el producto no existe, podrías lanzar una excepción o manejar el caso según tus requerimientos.
+                throw new InvalidOperationException("El producto no existe.");
+            }
+
+            // Actualiza las propiedades del producto con la información del producto modificado
+            existingProduct.Name_product = updatedProduct.Name_product;
+            existingProduct.Description = updatedProduct.Description;
+            existingProduct.Image = updatedProduct.Image;
+            existingProduct.Price = updatedProduct.Price;
+            existingProduct.stock = updatedProduct.stock;
+            existingProduct.size = updatedProduct.size;
+            existingProduct.Id_Category = updatedProduct.Id_Category;
+            existingProduct.Id_Administrador = updatedProduct.Id_Administrador;
+
+            _serviceContext.SaveChanges();
+        }
+
         public List<object> GetProducts()
         {
             var productsWithProductSizes = _serviceContext.Product
@@ -83,5 +106,27 @@ namespace emeriTEA_back_end.Services
 
             return productsWithProductSizes;
         }
+
+        public List<object> GetProductsByCategory(int categoryId)
+        {
+            var productsByCategory = _serviceContext.Product
+                .Where(p => p.Id_Category == categoryId)
+                .Select(p => new
+                {
+                    p.Id_Product,
+                    p.Name_product,
+                    p.Description,
+                    p.Image,
+                    size = p.ProductSize.Select(ps => ps.Size.Name_size).ToList(),
+                    p.Price,
+                    p.stock,
+                    p.Id_Category
+                })
+                .ToList<object>();
+
+            return productsByCategory;
+        }
+
+
     }
 }
