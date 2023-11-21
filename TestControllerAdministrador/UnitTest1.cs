@@ -1,5 +1,3 @@
-
-
 using Data;
 using emeriTEA_back_end.Controllers;
 using emeriTEA_back_end.IServices;
@@ -22,7 +20,11 @@ namespace TestControllerAdministrador
         private IAdministradorService _administradorService;
         private ServiceContext _serviceContext;
         private AdministradorControlle _administradorControlle;
+<<<<<<< HEAD
         private ITokenService _tokenService;
+=======
+        private TokenService _tokenService;
+>>>>>>> dev
 
         public AdministradorControlleTests()
         {
@@ -123,7 +125,6 @@ namespace TestControllerAdministrador
                 Assert.Fail("El resultado no es de tipo StatusCodeResult, OkObjectResult, ObjectResult ni ContentResult");
             }
         }
-
 
     }
 
