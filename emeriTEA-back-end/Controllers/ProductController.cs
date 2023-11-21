@@ -56,20 +56,33 @@ namespace emeriTEA_back_end.Controllers
         [HttpDelete("{productId}", Name = "DeleteProduct")]
         public IActionResult Delete(int productId)
         {
-            var selectedUser = _serviceContext.Set<Product>()
-                   .Where(u => u.Id_Product == productId)
-                    .FirstOrDefault();
+            //var selectedUser = _serviceContext.Set<Product>()
+            //       .Where(u => u.Id_Product == productId)
+            //        .FirstOrDefault();
 
-            if (selectedUser != null)
+            //if (selectedUser != null)
+            //{
+            //    _productService.DeleteProduct(productId);
+
+            //    // Devolver una respuesta con un mensaje de éxito o redirigir a una página de éxito
+            //    return Ok(new { message = "Producto eliminado exitosamente" });
+            //}
+            //else
+            //{
+            //    throw new InvalidCredentialException("El usuario no está autorizado o no existe");
+            //}
+
+            var selectedProduct = _serviceContext.Set<Product>()
+        .FirstOrDefault(u => u.Id_Product == productId);
+
+            if (selectedProduct != null)
             {
                 _productService.DeleteProduct(productId);
-
-                // Devolver una respuesta con un mensaje de éxito o redirigir a una página de éxito
                 return Ok(new { message = "Producto eliminado exitosamente" });
             }
             else
             {
-                throw new InvalidCredentialException("El usuario no está autorizado o no existe");
+                return NotFound(new { message = "Producto no encontrado" });
             }
         }
 
