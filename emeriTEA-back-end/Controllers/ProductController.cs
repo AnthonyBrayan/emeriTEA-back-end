@@ -55,19 +55,52 @@ namespace emeriTEA_back_end.Controllers
 
         [HttpDelete("{productId}", Name = "DeleteProduct")]
         public IActionResult Delete(int productId)
-        {      
+        {
 
-         var selectedProduct = _serviceContext.Set<Product>()
-        .FirstOrDefault(u => u.Id_Product == productId);
+            //var userId = _tokenService.ExtractUserIdFromToken(HttpContext);
+            var userId = _tokenService.ExtractUserIdFromAuthorizationHeader(HttpContext);
 
-            if (selectedProduct != null)
+            if (userId == null)
             {
-                _productService.DeleteProduct(productId);
-                return Ok(new { message = "Producto eliminado exitosamente" });
+
+                return Unauthorized("User is not authenticated.");
             }
             else
             {
-                return NotFound(new { message = "Producto no encontrado" });
+                var selectedUser = _serviceContext.Set<Product>()
+                       .Where(u => u.Id_Product == productId)
+                        .FirstOrDefault();
+
+                if (selectedUser != null)
+                {
+                    _productService.DeleteProduct(productId);
+
+                    return Ok(new { message = "Producto eliminado exitosamente" });
+                }
+                else
+                {
+                    throw new InvalidCredentialException("El usuario no está autorizado o no existe");
+                }
+            }
+
+        }
+
+        [HttpPut("{productId}", Name = "UpdateProduct")]
+        public IActionResult Put( int productId, [FromBody] Product updatedProduct)
+        {
+            //var userId = _tokenService.ExtractUserIdFromToken(HttpContext);
+            var userId = _tokenService.ExtractUserIdFromAuthorizationHeader(HttpContext);
+
+            if (userId == null)
+            {
+
+                return Unauthorized("User is not authenticated.");
+            }
+            else
+            {
+                updatedProduct.Id_Administrador = (int)userId;
+                _productService.UpdateProduct(productId, updatedProduct);
+                return Ok(new { message = "Producto editado exitosamente" });
             }
         }
 
@@ -77,13 +110,11 @@ namespace emeriTEA_back_end.Controllers
             return _productService.GetProducts();
         }
 
-        //[HttpGet(Name = "GetProductsWithSizes")]
-        //public List<Product> GetProductsWithSizes()
-        //{
-        //    return _productService.GetProductsWithSizes();
-        //}
-
-
+        [HttpGet(Name = "GetProductsByCategory")]
+        public List<object> GetProductsByCategory(int categotyId)
+        {
+            return _productService.GetProductsByCategory(categotyId);
+        }
 
 
 

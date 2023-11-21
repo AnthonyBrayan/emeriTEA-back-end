@@ -8,9 +8,10 @@ namespace emeriTEA_back_end.IServices
 
         int AddProductWithSizes(Product product);
         void DeleteProduct(int ProductId);
-
+        void UpdateProduct(int productId, Product updatedProduct);
         List<object> GetProducts();
-        //List<Product> GetProductsWithSizes();
+        List<object> GetProductsByCategory(int categoryId);
+
 
     }
 }
