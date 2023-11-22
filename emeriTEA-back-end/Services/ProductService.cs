@@ -92,7 +92,7 @@ namespace emeriTEA_back_end.Services
                     _serviceContext.ProductSize.RemoveRange(existingProduct.ProductSize);
                 }
             }
-            else if (existingProduct.Id_Category == 2) 
+            else if (existingProduct.Id_Category == 2)
             {
 
                 _serviceContext.ProductSize.RemoveRange(existingProduct.ProductSize);
@@ -108,18 +108,17 @@ namespace emeriTEA_back_end.Services
 
                         if (sizeByName != null)
                         {
-                                var newSizeAssociation = new ProductSize
-                                {
-                                    ProductId = existingProduct.Id_Product,
-                                    SizeId = sizeByName.Id_size
-                                };
-                                existingProduct.ProductSize.Add(newSizeAssociation);
+                            var newSizeAssociation = new ProductSize
+                            {
+                                ProductId = existingProduct.Id_Product,
+                                SizeId = sizeByName.Id_size
+                            };
+                            existingProduct.ProductSize.Add(newSizeAssociation);
 
                         }
                     }
                 }
             }
-
             _serviceContext.SaveChanges();
         }
 
