@@ -67,15 +67,15 @@ namespace emeriTEA_back_end.Services
 
         public void UpdateProduct(int productId, Product updatedProduct)
         {
-            var existingProduct = _serviceContext.Product.FirstOrDefault(p => p.Id_Product == productId);
+            var existingProduct = _serviceContext.Product
+                .Include(p => p.ProductSize)
+                .FirstOrDefault(p => p.Id_Product == productId);
 
             if (existingProduct == null)
             {
-                // Si el producto no existe, podrías lanzar una excepción o manejar el caso según tus requerimientos.
                 throw new InvalidOperationException("El producto no existe.");
             }
 
-            // Actualiza las propiedades del producto con la información del producto modificado
             existingProduct.Name_product = updatedProduct.Name_product;
             existingProduct.Description = updatedProduct.Description;
             existingProduct.Image = updatedProduct.Image;
@@ -85,8 +85,44 @@ namespace emeriTEA_back_end.Services
             existingProduct.Id_Category = updatedProduct.Id_Category;
             existingProduct.Id_Administrador = updatedProduct.Id_Administrador;
 
+            if (existingProduct.Id_Category == 1)
+            {
+                if (existingProduct.ProductSize.Any())
+                {
+                    _serviceContext.ProductSize.RemoveRange(existingProduct.ProductSize);
+                }
+            }
+            else if (existingProduct.Id_Category == 2) 
+            {
+
+                _serviceContext.ProductSize.RemoveRange(existingProduct.ProductSize);
+
+                if (updatedProduct.size.Any())
+                {
+                    var sizes = _serviceContext.Size.ToList();
+
+                    foreach (var newSizeName in updatedProduct.size)
+                    {
+
+                        var sizeByName = sizes.FirstOrDefault(s => string.Equals(s.Name_size, newSizeName, StringComparison.OrdinalIgnoreCase));
+
+                        if (sizeByName != null)
+                        {
+                                var newSizeAssociation = new ProductSize
+                                {
+                                    ProductId = existingProduct.Id_Product,
+                                    SizeId = sizeByName.Id_size
+                                };
+                                existingProduct.ProductSize.Add(newSizeAssociation);
+
+                        }
+                    }
+                }
+            }
+
             _serviceContext.SaveChanges();
         }
+
 
         public List<object> GetProducts()
         {
