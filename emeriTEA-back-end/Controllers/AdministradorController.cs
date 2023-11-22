@@ -4,12 +4,10 @@ using Entities;
 using Login;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Cors;
-
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
-
 
 namespace emeriTEA_back_end.Controllers
 {
@@ -20,14 +18,14 @@ namespace emeriTEA_back_end.Controllers
     {
         private readonly IConfiguration _configuration;
         private readonly IAdministradorService _administradorService;
-        private readonly ITokenService _tokenService;
+        //private readonly ITokenService _tokenService;
         private readonly ServiceContext _serviceContext;
 
-        public AdministradorControlle(IConfiguration configuration, IAdministradorService administradorService, ITokenService tokenService, ServiceContext serviceContext)
+        public AdministradorControlle(IConfiguration configuration, IAdministradorService administradorService, ServiceContext serviceContext)
         {
             _configuration = configuration;
             _administradorService = administradorService;
-            _tokenService = tokenService;
+            //_tokenService = tokenService;
             _serviceContext = serviceContext;
         }
 

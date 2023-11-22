@@ -116,8 +116,5 @@ namespace emeriTEA_back_end.Controllers
             return _productService.GetProductsByCategory(categotyId);
         }
 
-
-
-
     }
 }
