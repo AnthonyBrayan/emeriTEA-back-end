@@ -10,6 +10,7 @@ namespace Data
     {
         public ServiceContext(DbContextOptions<ServiceContext> options) : base(options) { }
         public DbSet<Administrador> Administrador { get; set; }
+        public DbSet<Product> Product { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder builder)
@@ -17,6 +18,11 @@ namespace Data
             builder.Entity<Administrador>(entity =>
             {
                 entity.ToTable("Administrador");
+            });
+
+            builder.Entity<Product>(entity =>
+            {
+                entity.ToTable("Product");
             });
 
         }

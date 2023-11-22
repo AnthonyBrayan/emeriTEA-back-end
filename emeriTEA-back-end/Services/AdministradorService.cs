@@ -16,8 +16,5 @@ namespace emeriTEA_back_end.Services
             return administrador.Id_Administrador;
         }
 
-
-
-
     }
 }
