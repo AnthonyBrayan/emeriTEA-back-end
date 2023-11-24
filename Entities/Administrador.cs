@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Text.Json.Serialization;
 
 namespace Entities
 {
@@ -17,6 +18,7 @@ namespace Entities
         public string Email { get; set; }
         public string Password { get; set; }
 
+        [JsonIgnore]
         public ICollection<Product> Product { get; set; }
     }
 }
