@@ -9,6 +9,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 using emeriTEA_back_end.Services;
+using Newtonsoft.Json.Linq;
 
 namespace emeriTEA_back_end.Controllers
 {
@@ -36,8 +37,8 @@ namespace emeriTEA_back_end.Controllers
         {
             try
             {
-                var userId = _tokenService.ExtractUserIdFromToken(HttpContext);
-                //var userId = _tokenService.ExtractUserIdFromAuthorizationHeader(HttpContext);
+                //var userId = _tokenService.ExtractUserIdFromToken(HttpContext);
+                var userId = _tokenService.ExtractUserIdFromAuthorizationHeader(HttpContext);
                 if (userId == null)
                 {
 
@@ -49,7 +50,6 @@ namespace emeriTEA_back_end.Controllers
                         Phone = string.Empty
                     };
 
-
                     _serviceContext.Guest.Add(guest);
                     _serviceContext.SaveChanges();
 
@@ -60,8 +60,6 @@ namespace emeriTEA_back_end.Controllers
                     });
 
                     guest.Token = token;
-
-
                     _serviceContext.SaveChanges();
 
 
@@ -69,19 +67,18 @@ namespace emeriTEA_back_end.Controllers
 
                     _guestCardService.AddGuestCart(guestCart);
 
-                    return Ok(new { message = "Producto agregado al carrito exitosamente" });
+                    return Ok(new { Token = token });
                 }
                 else
                 {
-                    var userIdInt = _tokenService.ExtractUserIdFromToken(HttpContext);
-                    //var idUser = _tokenService.ExtractUserIdFromAuthorizationHeader(HttpContext);
+                    //var userIdInt = _tokenService.ExtractUserIdFromToken(HttpContext);
+                    var userIdInt = _tokenService.ExtractUserIdFromAuthorizationHeader(HttpContext);
 
                     guestCart.Id_guest = (int)userIdInt;
 
                     _guestCardService.AddGuestCart(guestCart);
 
                     return Ok(new { message = "Producto agregado al carrito exitosamente" });
-
 
                 }
             }
