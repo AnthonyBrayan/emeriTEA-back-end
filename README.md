@@ -53,7 +53,12 @@ To be able to use the project on localhost it is necessary to clone it and to ha
 
    
 ## Next Steps 🔜
-
+- Checkout
+- Payment method association
+- Increase quantity of products 
+- Remove product from the front-end cart
+- Create visitor payment method function 
+- Remove product from Back-end cart
 
 
 ## Contributions
