@@ -36,11 +36,7 @@ To be able to use the project on localhost it is necessary to clone it and to ha
    ````bash
    cd eCommerce-TEA-Merida/backend
    ```
-3. Install the dependencies:
-   ````bash
-   npm install
-   ```
-4. Set the environment variables:
+3. Set the environment variables:
    - Create an `.env` file in the backend directory and set the necessary environment variables, such as the database connection string and the JWT secret key.
 
 
