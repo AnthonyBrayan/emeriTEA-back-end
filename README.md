@@ -34,7 +34,7 @@ To be able to use the project on localhost it is necessary to clone it and to ha
    ```
 2. Access the backend directory:
    ````bash
-   cd eCommerce-TEA-Merida/backend
+   cd emeriTEA-back-end
    ```
 3. Set the environment variables:
    - Create an `.env` file in the backend directory and set the necessary environment variables, such as the database connection string and the JWT secret key.
