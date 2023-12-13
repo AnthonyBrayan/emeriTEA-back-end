@@ -34,7 +34,8 @@ namespace TestControllerAdministrador
 
             _serviceContext = new ServiceContext(options);
             _administradorService = new AdministradorService(_serviceContext);
-            _administradorControlle = new AdministradorControlle(null, _administradorService, _tokenService, _serviceContext);
+            //_administradorControlle = new AdministradorControlle(null, _administradorService, _tokenService, _serviceContext);
+           
         }
 
 
